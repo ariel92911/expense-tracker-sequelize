@@ -1,0 +1,84 @@
+<!-- ./views/index.handlebars -->
+
+<form action="/records/category">
+  <div class="row justify-content-center">
+    <div class="form-group col-md-3">
+      <select name="month" class="form-control">
+        <option style="display: none">月份</option>
+        <option {{#if monthOption.Jan}} selected {{/if}}>01月</option>
+        <option {{#if monthOption.Feb}} selected {{/if}}>02月</option>
+        <option {{#if monthOption.Mar}} selected {{/if}}>03月</option>
+        <option {{#if monthOption.Apr}} selected {{/if}}>04月</option>
+        <option {{#if monthOption.May}} selected {{/if}}>05月</option>
+        <option {{#if monthOption.Jun}} selected {{/if}}>06月</option>
+        <option {{#if monthOption.Jul}} selected {{/if}}>07月</option>
+        <option {{#if monthOption.Aug}} selected {{/if}}>08月</option>
+        <option {{#if monthOption.Sep}} selected {{/if}}>09月</option>
+        <option {{#if monthOption.Oct}} selected {{/if}}>10月</option>
+        <option {{#if monthOption.Nov}} selected {{/if}}>11月</option>
+        <option {{#if monthOption.Dec}} selected {{/if}}>12月</option>
+        <option {{#if monthOption.All}} selected {{/if}}>All</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <select name="type" class="form-control">
+        <option style="display: none">類別</option>
+        <option {{#if typeOption.Home}} selected {{/if}}>家居物業</option>
+        <option {{#if typeOption.Traffic}} selected {{/if}}>交通出行</option>
+        <option {{#if typeOption.Fun}} selected {{/if}}>休閒娛樂</option>
+        <option {{#if typeOption.Food}} selected {{/if}}>餐飲食品</option>
+        <option {{#if typeOption.Other}} selected {{/if}}>其他</option>
+        <option {{#if typeOption.All}} selected {{/if}}>All</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit">select</button>
+  </div>
+
+</form>
+
+<div class="row justify-content-center mb-1">
+  <div class="col-md-4">
+    <p class="text-secondary mb-1 pl-1">
+      <strong>總金額：</strong>
+    </p>
+    <div class="text-center">
+      <h1 class="text-danger display-4 font-weight-bold">{{{totalAmount}}}</h1>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="row justify-content-center">
+  <div class="col-9 mx-auto ">
+    <p class="text-right text-secondary mb-2 pr-1">
+      <strong>總計：{{{records.length}}} 筆支出</strong>
+    </p>
+    <table class="table table-striped">
+      <tbody>
+        {{#each records}}
+        <tr>
+          <th scope="row" style="vertical-align:middle; color: Dodgerblue;" class="pl-4">{{{this.category}}}</th>
+          <td>
+            <div><strong class="h4">{{{this.name}}}</strong></div>
+            <div>{{{this.date}}} {{{this.merchant}}}</div>
+          </td>
+          <td class="text-right h4" style="vertical-align:middle;">$ {{{this.amount}}}</td>
+          <td class="text-right" style="vertical-align:middle;">
+            <a href="/records/{{{this.id}}}/edit" class="btn btn-outline-dark">修改<i class="fas fa-edit ml-1"></i></a>
+            <form action="/records/{{{this.id}}}/delete" method="POST" style="display: inline;">
+              <button type="submit" class="btn btn-outline-dark">刪除<i class="fas fa-trash-alt ml-1"></i></button>
+            </form>
+
+          </td>
+        </tr>
+
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="text-center my-5">
+  <a href="/records/new" class="btn btn-primary btn-lg">新增支出</a>
+</div>
