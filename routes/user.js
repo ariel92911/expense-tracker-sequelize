@@ -16,11 +16,10 @@ router.get('/login', (req, res) => {
 
 // 登入檢查
 router.post('/login', (req, res, next) => {
-  res.send('登入檢查')
-  // passport.authenticate('local', {                        // 使用 passport 認證
-  //   successRedirect: '/',                                         // 登入成功會回到根目錄
-  //   failureRedirect: '/users/login'                        // 失敗會留在登入頁面
-  // })(req, res, next)
+  passport.authenticate('local', {                         // 使用 passport 認證
+    successRedirect: '/',                                  // 登入成功會回到根目錄
+    failureRedirect: '/users/login'                        // 失敗會留在登入頁面
+  })(req, res, next)
 })
 
 // 註冊頁面
