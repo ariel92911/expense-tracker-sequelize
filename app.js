@@ -2,14 +2,13 @@
 
 const express = require('express')
 const app = express()
+const port = 3000
 
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 //const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
-
-const port = 3000
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -40,13 +39,9 @@ app.use((req, res, next) => {
 })
 
 
-// 設定路由
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
-
 // 載入路由器
-//app.use('/', require('./routes/home'))
+app.use('/', require('./routes/home'))
+app.use('/records', require('./routes/record'))
 app.use('/users', require('./routes/user'))
 
 
