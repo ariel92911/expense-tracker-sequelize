@@ -1,4 +1,4 @@
-# expense-tracker
+# expense-tracker-sequelize
 一個簡單的網路記帳工具。
 
 
