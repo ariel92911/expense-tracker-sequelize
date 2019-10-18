@@ -3,6 +3,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const db = require('./models')
 
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
@@ -15,11 +16,6 @@ app.set('view engine', 'handlebars')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 //app.use(methodOverride('_method'))
-
-// 載入 model
-const db = require('./models')
-const Record = db.Record
-const User = db.User
 
 app.use(session({
   secret: 'my secret key',
